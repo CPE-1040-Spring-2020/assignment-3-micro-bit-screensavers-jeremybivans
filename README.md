@@ -41,6 +41,13 @@ This assignnment is more involved than the first two, but uses the same basic mi
 
 4. The "screensaver" should time out and the "screen" should go blank. This does not automatically change the mode to _working_.
 
+*My screen savers*
+1. Randomized boucing ball. Each move is in a randomized direction.
+2. Flashing full array.
+3. Randomized LED lighting at random coordinates and brightness. (hard to see in video).
+4. Moving and blinking sprite.
+5. Ball "game". 2 balls spawn and go in random directions until they both populate the same LED and "explode". Resets after explosion.
+
 #### 4. Gestures
 
 1. Pick 5 gestures to correspond to your 5 screensavers. When the micro:bit is _asleep_ and detects a gesture, it should switch to the corresponding "screensaver". This does not automatically change the mode to _working_.
@@ -73,6 +80,8 @@ This assignnment is more involved than the first two, but uses the same basic mi
 2. Upload it to [Imgur](https://help.imgur.com/hc/en-us/articles/115000083326-What-files-can-I-upload-What-is-the-size-limit-).
 
 3. Include the URL in the [Demo video](#demo-video) section of the README.
+
+imgur.com/gallery/CTOIFsL?s=sms
 
 ## Resources
 
