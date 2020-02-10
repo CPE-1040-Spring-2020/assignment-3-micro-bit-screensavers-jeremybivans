@@ -1,0 +1,168 @@
+input.onButtonPressed(Button.A, function () {
+    state = false
+})
+input.onButtonPressed(Button.B, function () {
+    state = true
+})
+
+let ss_choice = 0
+let state = false
+
+let gest = Gesture.Shake
+let ssArr = [randomBall, ledTrace, ballClash, randomSprites, gradient]
+let gestures = [Gesture.Shake, Gesture.TiltLeft, Gesture.TiltRight, Gesture.LogoDown, Gesture.LogoUp]
+
+function randomBall() {
+
+    let ball = game.createSprite(2, 2)
+
+    while (gest == Gesture.Shake) {
+
+        ball.move(1)
+        ball.ifOnEdgeBounce()
+        let z = Math.randomRange(0, 90)
+        ball.turn(Direction.Right, z)
+        basic.pause(100)
+
+    }
+
+    ball.delete()
+
+}
+
+function ballClash() {
+
+    let ball2 = game.createSprite(0, 0)
+    let ball3 = game.createSprite(4, 4)
+
+    while (gest == Gesture.TiltRight) {
+
+        ball2.move(1)
+        ball2.ifOnEdgeBounce()
+        let z = Math.randomRange(0, 90)
+        ball2.turn(Direction.Right, z)
+
+        ball3.move(1)
+        ball3.ifOnEdgeBounce()
+        ball3.turn(Direction.Right, z)
+        basic.pause(100)
+
+        if (ball2.isTouching(ball3)) {
+
+            basic.pause(500)
+            basic.clearScreen()
+            basic.showString("BOOM")
+            ball2.set(LedSpriteProperty.X, 0)
+            ball2.set(LedSpriteProperty.Y, 0)
+            ball3.set(LedSpriteProperty.X, 4)
+            ball3.set(LedSpriteProperty.Y, 4)
+
+        }
+
+    }
+
+    ball2.delete()
+    ball3.delete()
+
+}
+
+function ledTrace() {
+
+    while (gest == Gesture.TiltLeft) {
+
+        for (let index = 0; index <= 4; index++) {
+
+            for (let j1 = 0; j1 <= 4; j1++) {
+
+                led.toggle(index, j1)
+                basic.pause(100)
+
+            }
+        }
+
+    }
+
+    basic.clearScreen()
+
+}
+
+function randomSprites() {
+
+    let x = Math.randomRange(0, 4)
+    let y = Math.randomRange(0, 4)
+    let b = Math.randomRange(0, 255)
+
+    while (gest == Gesture.LogoDown) {
+
+        led.plotBrightness(x, y, b)
+        x = Math.randomRange(0, 4)
+        y = Math.randomRange(0, 4)
+        b = Math.randomRange(0, 255)
+        if (gest != Gesture.LogoDown) {
+            break
+        }
+        basic.pause(1)
+    }
+
+    basic.clearScreen()
+
+}
+
+function gradient() {
+
+    for (let i = 0; i <= 4; i++) {
+
+        for (let j = 0; j <= 4; j++) {
+
+            for (let k = 0; k <= 4; k++) {
+                led.plot(i, k)
+            }
+
+        }
+
+    }
+
+}
+input.onGesture(Gesture.Shake, function () {
+
+    gest = Gesture.Shake
+
+})
+
+input.onGesture(Gesture.TiltLeft, function () {
+
+    gest = Gesture.TiltLeft
+
+})
+
+input.onGesture(Gesture.TiltRight, function () {
+
+    gest = Gesture.TiltRight
+
+})
+
+input.onGesture(Gesture.LogoDown, function () {
+
+    gest = Gesture.LogoDown
+
+})
+
+input.onGesture(Gesture.LogoUp, function () {
+
+    gest = Gesture.LogoUp
+
+})
+
+basic.forever(function () {
+
+    if (state) {
+
+        basic.showString("Screen On!")
+
+    } else {
+
+        ssArr[gestures.indexOf(gest)]()
+
+    }
+
+})
